@@ -1,4 +1,5 @@
 import { focusAreas } from '../data/portfolio'
+import { iconRegistry } from './iconRegistry'
 
 function AboutSection(): JSX.Element {
   return (
@@ -18,13 +19,18 @@ function AboutSection(): JSX.Element {
             <h3 className="mb-4 text-sm font-semibold uppercase tracking-[0.28em] text-slate-500">
               Focus Areas
             </h3>
-            <ul className="grid gap-3 text-sm text-slate-700 md:grid-cols-2">
-              {focusAreas.map((area) => (
-                <li className="flex gap-3" key={area}>
-                  <span className="mt-1 h-1.5 w-1.5 flex-none rounded-full bg-gradient-to-r from-accent-orange-500 to-emerald-500" aria-hidden="true" />
-                  <span>{area}</span>
-                </li>
-              ))}
+            <ul className="grid gap-4 text-sm text-slate-700 md:grid-cols-2">
+              {focusAreas.map((area) => {
+                const Icon = iconRegistry[area.icon]
+                return (
+                  <li className="flex items-start gap-3" key={area.label}>
+                    <span className="flex h-10 w-10 flex-none items-center justify-center rounded-xl bg-slate-50 text-slate-600 ring-1 ring-slate-200">
+                      <Icon aria-hidden="true" size={18} />
+                    </span>
+                    <span className="leading-snug">{area.label}</span>
+                  </li>
+                )
+              })}
             </ul>
           </div>
         </div>
