@@ -2,8 +2,35 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { featuredProject, supportingProjects } from '../data/portfolio'
 import AnimatedPage from '../components/AnimatedPage'
+import { iconRegistry } from '../components/iconRegistry'
+import type { VisualCue } from '../types/portfolio'
 
 type Tab = 'work' | 'personal'
+
+function VisualPills({ items, variant = 'default' }: { items?: VisualCue[]; variant?: 'default' | 'independent' }): JSX.Element | null {
+  if (!items?.length) return null
+
+  const baseClasses =
+    'inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-semibold ring-1 transition-all'
+  const variantClasses =
+    variant === 'independent'
+      ? 'bg-slate-50 text-slate-600 ring-slate-200 hover:ring-slate-300'
+      : 'bg-emerald-50 text-emerald-700 ring-emerald-200 hover:ring-emerald-300'
+
+  return (
+    <ul className="flex flex-wrap gap-2">
+      {items.map((item) => {
+        const Icon = iconRegistry[item.icon]
+        return (
+          <li className={`${baseClasses} ${variantClasses}`} key={item.label}>
+            <Icon aria-hidden="true" size={16} />
+            <span>{item.label}</span>
+          </li>
+        )
+      })}
+    </ul>
+  )
+}
 
 function ProjectsPage(): JSX.Element {
   const [activeTab, setActiveTab] = useState<Tab>('work')
@@ -78,6 +105,7 @@ function ProjectsPage(): JSX.Element {
                         {project.role}
                       </p>
                       <p className="text-sm font-medium text-slate-500">{project.subtitle}</p>
+                      <VisualPills items={project.visuals} />
                       <p className="text-base text-slate-600">{project.description}</p>
                       <p className="text-base font-semibold bg-gradient-to-r from-accent-orange-500 to-emerald-500 bg-clip-text text-transparent">
                         {project.result}
@@ -168,6 +196,7 @@ function ProjectsPage(): JSX.Element {
                     </div>
                     <p className="text-sm font-semibold text-slate-600">{project.role}</p>
                     <p className="text-sm font-medium text-slate-500">{project.subtitle}</p>
+                    <VisualPills items={project.visuals} variant="independent" />
                     <p className="text-base text-slate-600">{project.description}</p>
                     <p className="text-base font-semibold bg-gradient-to-r from-accent-orange-500 to-emerald-500 bg-clip-text text-transparent">
                       {project.result}

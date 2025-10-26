@@ -1,29 +1,42 @@
-export type Project = {
-  title: string
-  subtitle: string
-  role: string
-  period: string
-  description: string
-  result: string
-  stack: string[]
-  metrics?: string[]
-  link?: string
-}
+import type {
+  Article,
+  ExperienceItem,
+  Project,
+  ProjectChart,
+  ProjectStoryBeat,
+  VisualCue,
+} from '../types/portfolio'
 
-export type ExperienceItem = {
-  company: string
-  role: string
-  period: string
-  summary: string
-  highlights: string[]
-}
+const featuredStory = [
+  {
+    id: '01',
+    title: 'Analysis',
+    description: 'Agent SDK + fine-tuned LLM scoped migration targets using Neo4j-backed prompts.',
+  },
+  {
+    id: '02',
+    title: 'Migration workflow',
+    description: 'Agent SDK executed the workflow that transformed the legacy codebase.',
+  },
+  {
+    id: '03',
+    title: 'Differential testing',
+    description: 'Testing compared legacy outputs with the new microservice and fed diffs back to the Agent SDK.',
+  },
+] satisfies ProjectStoryBeat[]
 
-export type Article = {
-  title: string
-  description: string
-  link: string
-  year: string
-}
+const featuredCharts = [
+  {
+    id: 'loc-migrated',
+    title: 'Migration velocity',
+    description: 'Claude Code Agent SDK + grammar MCP scaled throughput 10x.',
+    unit: 'Lines per release',
+    series: [
+      { label: 'Manual refactors', value: 1000, tone: 'before' },
+      { label: 'Agent SDK workflow', value: 10000, tone: 'after' },
+    ],
+  },
+] satisfies ProjectChart[]
 
 export const hero = {
   location: 'AI Strategy & Innovation Engineer at Visa · San Francisco, California',
@@ -40,15 +53,21 @@ export const featuredProject: Project = {
   role: 'AI Strategy & Innovation Engineer',
   period: '2024 — 2025',
   description:
-    'Led a 10M-line migration with Claude Code plus a custom fine-tune, orchestrated through an MCP graph that kept refactors context-aware.',
-  result:
-    'Shipped the migration without downtime while the graph-guided workflow prevented breaking changes.',
-  stack: ['Claude Code', 'Fine-tuned LLM', 'MCP Server', 'Graph Database', 'Python', 'TypeScript'],
+    'Claude Code Agent SDK agents, backed by a grammar MCP and Neo4j graph, drove each refactor.',
+  result: '3x deployments while reviewers stayed on high-signal diffs.',
+  stack: ['Claude Code', 'Agent SDK', 'Custom Grammar', 'MCP Tools', 'Neo4j', 'TypeScript'],
   metrics: [
-    '10M lines migrated with AI-assisted refactoring',
-    'MCP + graph database kept dependency context live',
-    'Fine-tuned model hit 85% on domain-specific transformations',
+    'Agent SDK handled scripted refactors end-to-end',
+    'Grammar MCP converted DSL into reviewable ASTs',
+    'Graph prompts surfaced migration risk automatically',
   ],
+  visuals: [
+    { label: 'Fine-tuned models', icon: 'Sparkles' },
+    { label: 'MCP graph orchestration', icon: 'CircuitBoard' },
+    { label: 'Dependency intelligence', icon: 'Network' },
+  ],
+  story: featuredStory,
+  charts: featuredCharts,
 }
 
 export const supportingProjects: Project[] = [
@@ -62,6 +81,11 @@ export const supportingProjects: Project[] = [
     result:
       'Enabled 20+ teams across Visa to fine-tune custom models without requiring deep ML infrastructure knowledge. Reduced time-to-fine-tune from weeks to hours and significantly lowered the barrier to entry for AI experimentation.',
     stack: ['Python', 'CLI', 'GPU Clusters', 'PyTorch', 'Distributed Training', 'Docker', 'Kubernetes'],
+    visuals: [
+      { label: 'GPU orchestration', icon: 'Cpu' },
+      { label: 'LLM fine-tuning workflow', icon: 'Sparkles' },
+      { label: 'Developer-friendly CLI', icon: 'ServerCog' },
+    ],
   },
   {
     title: 'BERT Knowledge Distillation',
@@ -74,6 +98,11 @@ export const supportingProjects: Project[] = [
       'Successfully reduced model size and inference time while preserving the core capabilities of BERT, making advanced NLP accessible for resource-constrained environments.',
     stack: ['Python', 'PyTorch', 'Transformers', 'BERT', 'Machine Learning'],
     link: 'https://github.com/gupta799/LLMFinetuning',
+    visuals: [
+      { label: 'Knowledge distillation', icon: 'Sparkles' },
+      { label: 'Transformer internals', icon: 'BrainCircuit' },
+      { label: 'Efficiency tuning', icon: 'Cpu' },
+    ],
   },
   {
     title: 'Go Microservice API',
@@ -86,6 +115,11 @@ export const supportingProjects: Project[] = [
       'Delivered a production-ready microservice with efficient concurrent processing, modular architecture, and containerized deployment support.',
     stack: ['Go', 'Redis', 'Docker', 'RESTful API', 'Goroutines', 'Microservices'],
     link: 'https://github.com/gupta799/go_api',
+    visuals: [
+      { label: 'Concurrent Go routines', icon: 'ServerCog' },
+      { label: 'Redis microservice', icon: 'Database' },
+      { label: 'Containerized delivery', icon: 'Workflow' },
+    ],
   },
   {
     title: 'JaiydevRAG',
@@ -98,6 +132,11 @@ export const supportingProjects: Project[] = [
       'Gained hands-on experience with cutting-edge RAG techniques and practical knowledge of different AI model architectures and their applications.',
     stack: ['Python', 'Vector Search', 'LLMs', 'Embeddings', 'RAG Patterns'],
     link: 'https://github.com/gupta799/JaiydevRAG',
+    visuals: [
+      { label: 'RAG pipelines', icon: 'Layers' },
+      { label: 'Vector search', icon: 'Network' },
+      { label: 'LLM evaluation', icon: 'Bot' },
+    ],
   },
 ]
 
@@ -129,13 +168,13 @@ export const experiences: ExperienceItem[] = [
   },
 ]
 
-export const focusAreas: string[] = [
-  'RAG (Retrieval-Augmented Generation)',
-  'Fine-tuning (SFT, Pretraining)',
-  'MCP (Model Context Protocol)',
-  'Graph Databases',
-  'Agent Frameworks (Agent SDK, LangGraph)',
-  'Distributed Training',
+export const focusAreas: VisualCue[] = [
+  { label: 'RAG (Retrieval-Augmented Generation)', icon: 'Layers' },
+  { label: 'Fine-tuning (SFT, Pretraining)', icon: 'Sparkles' },
+  { label: 'MCP (Model Context Protocol)', icon: 'CircuitBoard' },
+  { label: 'Graph Databases', icon: 'Network' },
+  { label: 'Agent Frameworks (Agent SDK, LangGraph)', icon: 'Workflow' },
+  { label: 'Distributed Training', icon: 'Cpu' },
 ]
 
 export const articles: Article[] = [
