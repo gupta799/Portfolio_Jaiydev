@@ -1,4 +1,4 @@
-import { Mail, Linkedin, Github } from 'lucide-react'
+import { Mail, Linkedin, Github, Download } from 'lucide-react'
 import { hero } from '../data/portfolio'
 import AnimatedPage from '../components/AnimatedPage'
 import HeroAnimationCarousel from '../components/HeroAnimationCarousel'
@@ -67,6 +67,15 @@ function HomePage(): JSX.Element {
                   target="_blank"
                 >
                   <Github size={20} />
+                </a>
+                <a
+                  aria-label="Download resume"
+                  title="Download resume (PDF)"
+                  className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 text-slate-600 transition-all hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900"
+                  download
+                  href="/resume.pdf"
+                >
+                  <Download size={20} />
                 </a>
               </div>
             </div>

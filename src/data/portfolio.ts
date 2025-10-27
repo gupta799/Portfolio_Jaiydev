@@ -153,19 +153,8 @@ export const experiences: ExperienceItem[] = [
       'Architected enterprise CLI fine-tuning tool, enabling 20+ teams to leverage Visa GPU clusters without ML infrastructure expertise.',
       'Led 10M+ line codebase migration using Claude Code with custom fine-tuned models and graph database integration via MCP servers.',
     ],
-  },
-  {
-    company: 'The Ohio State University',
-    role: 'Student & Software Engineer',
-    period: '2018 — 2022',
-    summary:
-      'Completed undergraduate degree while building full-stack applications, compilers, and network programming projects.',
-    highlights: [
-      'Developed TA Registration App using Ruby on Rails for academic administration.',
-      'Built Budget Builder App with MERN stack for personal finance management.',
-      'Implemented Bug Language Compiler and Weather App with socket programming.',
-    ],
-  },
+  }
+  
 ]
 
 export const focusAreas: VisualCue[] = [
