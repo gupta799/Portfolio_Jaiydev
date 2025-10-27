@@ -78,6 +78,13 @@ function HeroSection(): JSX.Element {
             </a>
             <a
               className="inline-flex items-center justify-center rounded-full border-2 border-slate-200 px-6 py-3 text-sm font-semibold text-slate-900 transition-all duration-200 hover:border-slate-300 hover:bg-slate-50 focus-visible:border-slate-300 focus-visible:bg-slate-50"
+              href="/resume.pdf"
+              download
+            >
+              Download resume
+            </a>
+            <a
+              className="inline-flex items-center justify-center rounded-full border-2 border-slate-200 px-6 py-3 text-sm font-semibold text-slate-900 transition-all duration-200 hover:border-slate-300 hover:bg-slate-50 focus-visible:border-slate-300 focus-visible:bg-slate-50"
               href="https://linkedin.com/in/jaiydev-gupta-408269160/"
               rel="noreferrer"
               target="_blank"

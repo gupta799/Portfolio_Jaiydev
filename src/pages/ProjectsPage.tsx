@@ -1,7 +1,8 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
-import { featuredProject, supportingProjects } from '../data/portfolio'
+import { supportingProjects } from '../data/portfolio'
 import AnimatedPage from '../components/AnimatedPage'
+import FeaturedCaseStudySection from '../components/FeaturedCaseStudySection'
+import SectionHeading from '../components/SectionHeading'
 import { iconRegistry } from '../components/iconRegistry'
 import type { VisualCue } from '../types/portfolio'
 
@@ -38,18 +39,13 @@ function ProjectsPage(): JSX.Element {
   const visaLabel = 'Visa VAS Innovation Labs'
 
   // Categorize projects
-  const workProjects = supportingProjects.filter((project) =>
-    project.title === 'Enterprise Fine-Tuning CLI Tool'
+  const workProjects = supportingProjects.filter(
+    (project) => project.title === 'Enterprise Fine-Tuning CLI Tool',
   )
 
   const personalProjects = supportingProjects.filter((project) =>
     ['BERT Knowledge Distillation', 'Go Microservice API', 'JaiydevRAG'].includes(project.title)
   )
-
-  const workItems = [
-    { kind: 'case-study' as const, project: featuredProject },
-    ...workProjects.map((project) => ({ kind: 'work' as const, project })),
-  ]
 
   const tabs: { id: Tab; label: string }[] = [
     { id: 'work', label: 'Work' },
@@ -58,9 +54,10 @@ function ProjectsPage(): JSX.Element {
 
   return (
     <AnimatedPage>
+      <FeaturedCaseStudySection />
       <section className="bg-white">
         <div className="mx-auto max-w-6xl px-6 py-16 md:px-8 md:py-20">
-          <h2 className="text-3xl font-bold tracking-tight text-slate-900 md:text-4xl">My Work</h2>
+          <SectionHeading title="My Work" description="Selected builds from Visa and personal R&D." />
 
           {/* Tabs */}
           <div className="mt-8 flex flex-wrap gap-2 border-b border-slate-200">
@@ -82,8 +79,7 @@ function ProjectsPage(): JSX.Element {
           {/* Work Projects */}
           {activeTab === 'work' && (
             <div className="mt-8 space-y-8">
-              {workItems.map((item) => {
-                const { project } = item
+              {workProjects.map((project) => {
                 return (
                   <article
                     className="group flex flex-col gap-6 rounded-3xl border border-slate-200 bg-white p-6 shadow-card transition-all duration-300 hover:shadow-card-hover md:flex-row md:items-stretch md:gap-10 md:p-8"
@@ -110,15 +106,7 @@ function ProjectsPage(): JSX.Element {
                       <p className="text-base font-semibold bg-gradient-to-r from-accent-orange-500 to-emerald-500 bg-clip-text text-transparent">
                         {project.result}
                       </p>
-                      {item.kind === 'case-study' ? (
-                        <Link
-                          className="inline-flex items-center gap-2 text-sm font-semibold text-slate-900 transition-all hover:gap-3"
-                          to="/case-study/visa"
-                        >
-                          Deep dive on the Visa build
-                          <span aria-hidden="true">→</span>
-                        </Link>
-                      ) : project.link ? (
+                      {project.link ? (
                         <a
                           className="inline-flex items-center gap-2 text-sm font-semibold text-slate-900 transition-all hover:gap-3"
                           href={project.link}
