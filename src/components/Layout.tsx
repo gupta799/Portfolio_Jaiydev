@@ -7,8 +7,8 @@ export default function Layout(): JSX.Element {
   const location = useLocation()
 
   return (
-    <div className="relative min-h-screen">
-      <header className="sticky top-0 z-50">
+    <div className="relative min-h-screen bg-white text-slate-900">
+      <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-md">
         <div className="mx-auto max-w-6xl px-6 py-5 md:px-8">
           <Navigation />
         </div>

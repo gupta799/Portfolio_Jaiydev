@@ -73,9 +73,9 @@ export default function HeroAnimationCarousel(): JSX.Element {
   const active = panels[activeIndex]
 
   return (
-    <div className="glass-dark-strong overflow-hidden rounded-3xl">
+    <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-card">
       {/* Tab bar */}
-      <div className="flex items-center justify-between border-b border-white/8 px-6 py-4">
+      <div className="flex items-center justify-between border-b border-slate-100 px-6 py-4">
         <div className="flex items-center gap-1">
           {panels.map((panel, i) => {
             const isActive = i === activeIndex
@@ -85,7 +85,7 @@ export default function HeroAnimationCarousel(): JSX.Element {
                 onClick={() => handleTab(i)}
                 type="button"
                 className={`relative rounded-full px-5 py-2 text-xs font-semibold transition-colors duration-200 ${
-                  isActive ? 'text-white' : 'text-white/35 hover:text-white/65'
+                  isActive ? 'text-slate-900' : 'text-slate-400 hover:text-slate-600'
                 }`}
               >
                 {panel.label}
@@ -103,7 +103,7 @@ export default function HeroAnimationCarousel(): JSX.Element {
         </div>
 
         {/* Progress strip */}
-        <div className="h-px w-24 overflow-hidden rounded-full bg-white/10">
+        <div className="h-px w-24 overflow-hidden rounded-full bg-slate-200">
           <motion.div
             className="h-full origin-left rounded-full bg-gradient-to-r from-orange-400 to-emerald-400"
             style={{ scaleX: progress }}
@@ -117,7 +117,7 @@ export default function HeroAnimationCarousel(): JSX.Element {
         <AnimatePresence mode="wait">
           <motion.p
             key={`desc-${active.id}`}
-            className="text-sm text-white/50"
+            className="text-sm text-slate-500"
             initial={{ opacity: 0, y: 6 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -6 }}
