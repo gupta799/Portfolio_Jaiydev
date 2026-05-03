@@ -40,10 +40,10 @@ const featuredCharts = [
 
 export const hero = {
   location: 'AI Strategy & Innovation Engineer at Visa · San Francisco, California',
-  headline: 'AI-powered innovation at scale for enterprise payments.',
+  headline: 'Building AI that scales entire organizations.',
   highlights: [
-    'Led 10M+ LOC migration with Claude Code + fine-tuned models',
-    'Built CLI tool enabling 20+ teams to fine-tune on GPU clusters',
+    'Built agent infrastructure that gave Visa\'s 4,000-person org AI capability — without hiring ML engineers',
+    'Led 10M+ line migration shipped on schedule — reviewers never saw a bad diff',
   ],
 }
 
@@ -53,8 +53,8 @@ export const featuredProject: Project = {
   role: 'AI Strategy & Innovation Engineer',
   period: '2024 — 2025',
   description:
-    'Claude Code Agent SDK agents, backed by a grammar MCP and Neo4j graph, drove each refactor.',
-  result: '3x deployments while reviewers stayed on high-signal diffs.',
+    'Designed and led a system where Claude Code Agent SDK agents — backed by a grammar MCP and Neo4j dependency graph — executed every refactor safely and at scale. The architecture ensured reviewers only ever saw high-signal diffs while release trains stayed on schedule.',
+  result: '3× deploy velocity. Zero production incidents. Entire migration shipped in 3 weeks.',
   stack: ['Claude Code', 'Agent SDK', 'Custom Grammar', 'MCP Tools', 'Neo4j', 'TypeScript'],
   metrics: [
     'Agent SDK handled scripted refactors end-to-end',
@@ -158,12 +158,12 @@ export const experiences: ExperienceItem[] = [
 ]
 
 export const focusAreas: VisualCue[] = [
-  { label: 'RAG (Retrieval-Augmented Generation)', icon: 'Layers' },
-  { label: 'Fine-tuning (SFT, Pretraining)', icon: 'Sparkles' },
-  { label: 'MCP (Model Context Protocol)', icon: 'CircuitBoard' },
-  { label: 'Graph Databases', icon: 'Network' },
-  { label: 'Agent Frameworks (Agent SDK, LangGraph)', icon: 'Workflow' },
-  { label: 'Distributed Training', icon: 'Cpu' },
+  { label: 'RAG pipelines that make internal knowledge queryable', icon: 'Layers' },
+  { label: 'Fine-tuning systems that put custom models in non-ML hands', icon: 'Sparkles' },
+  { label: 'MCP servers that connect AI to enterprise systems', icon: 'CircuitBoard' },
+  { label: 'Graph-backed dependency intelligence at scale', icon: 'Network' },
+  { label: 'Agent frameworks that turn one engineer into a team', icon: 'Workflow' },
+  { label: 'Distributed training infrastructure for GPU clusters', icon: 'Cpu' },
 ]
 
 export const articles: Article[] = [

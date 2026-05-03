@@ -9,8 +9,9 @@ function Layout(): JSX.Element {
   return (
     <div className="relative min-h-screen bg-white text-slate-900">
       <div className="relative flex min-h-screen flex-col">
-        <header className="bg-white">
-          <div className="mx-auto max-w-6xl px-6 py-6 md:px-8">
+        {/* Sticky nav sits above everything — transparent on dark hero, frosted on scroll */}
+        <header className="sticky top-0 z-50">
+          <div className="mx-auto max-w-6xl px-6 py-5 md:px-8">
             <Navigation />
           </div>
         </header>
