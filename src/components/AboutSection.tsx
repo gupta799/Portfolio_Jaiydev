@@ -1,81 +1,67 @@
 import { motion } from 'framer-motion'
 import { focusAreas } from '../data/portfolio'
-import SectionHeading from './SectionHeading'
 import { iconRegistry } from './iconRegistry'
 
-const containerVariants = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.08, delayChildren: 0.1 } },
-}
-
-const itemVariants = {
+const item = {
   hidden: { opacity: 0, y: 20 },
   show: { opacity: 1, y: 0, transition: { type: 'spring' as const, stiffness: 90, damping: 18 } },
 }
 
-function AboutSection(): JSX.Element {
+export default function AboutSection(): JSX.Element {
   return (
     <section className="bg-white">
-      <div className="mx-auto grid max-w-6xl gap-12 px-6 py-16 md:px-8 md:py-20" id="about">
+      <div className="mx-auto max-w-5xl px-6 py-24 md:px-8 md:py-28" id="about">
+
+        {/* Heading */}
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-40px' }}
-          transition={{ type: 'spring', stiffness: 90, damping: 18 }}
+          className="mb-16 space-y-4"
+          variants={{ hidden: {}, show: { transition: { staggerChildren: 0.1 } } }}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: '-60px' }}
         >
-          <SectionHeading
-            eyebrow="About"
-            title="Engineering AI infrastructure at scale"
-            description="I build AI infrastructure that gives teams AI superpowers — from agent orchestration pipelines to fine-tuning systems that put custom models in non-ML hands."
-            className="max-w-3xl"
-          />
+          <motion.p variants={item} className="text-xs font-semibold uppercase tracking-[0.32em] text-slate-400">
+            About
+          </motion.p>
+          <motion.h2
+            variants={item}
+            className="max-w-2xl text-balance text-4xl font-black tracking-tight text-slate-900 md:text-5xl"
+          >
+            Engineering AI infrastructure{' '}
+            <span className="bg-gradient-to-r from-orange-500 to-emerald-500 bg-clip-text text-transparent">
+              at scale
+            </span>
+          </motion.h2>
+          <motion.p variants={item} className="max-w-xl text-base text-slate-500">
+            I build AI infrastructure that gives teams superpowers — agent orchestration pipelines, fine-tuning systems that put custom models in non-ML hands, and frameworks that let entire organizations move faster.
+          </motion.p>
         </motion.div>
 
-        <motion.div
-          className="rounded-3xl border border-slate-200 bg-white p-8 shadow-card md:p-12"
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
+        {/* Focus areas grid */}
+        <motion.ul
+          className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
+          variants={{ hidden: {}, show: { transition: { staggerChildren: 0.07, delayChildren: 0.1 } } }}
+          initial="hidden"
+          whileInView="show"
           viewport={{ once: true, margin: '-40px' }}
-          transition={{ type: 'spring', stiffness: 80, damping: 18, delay: 0.1 }}
         >
-          <motion.div
-            className="rounded-2xl border border-slate-100 bg-slate-50/50 p-6"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2, duration: 0.5 }}
-          >
-            <h3 className="mb-6 text-xs font-semibold uppercase tracking-[0.32em] text-slate-400">
-              Capability areas
-            </h3>
-            <motion.ul
-              className="grid gap-4 text-sm text-slate-700 md:grid-cols-2"
-              variants={containerVariants}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true }}
-            >
-              {focusAreas.map((area) => {
-                const Icon = iconRegistry[area.icon]
-                return (
-                  <motion.li
-                    className="group flex items-start gap-3"
-                    key={area.label}
-                    variants={itemVariants}
-                  >
-                    <span className="flex h-10 w-10 flex-none items-center justify-center rounded-xl bg-gradient-to-br from-orange-50 to-emerald-50 text-orange-500 ring-1 ring-orange-100 transition-all group-hover:shadow-glow-orange group-hover:ring-orange-200">
-                      <Icon aria-hidden="true" size={18} />
-                    </span>
-                    <span className="mt-2 leading-snug">{area.label}</span>
-                  </motion.li>
-                )
-              })}
-            </motion.ul>
-          </motion.div>
-        </motion.div>
+          {focusAreas.map((area) => {
+            const Icon = iconRegistry[area.icon]
+            return (
+              <motion.li
+                key={area.label}
+                variants={item}
+                className="group flex items-start gap-4 rounded-2xl border border-slate-100 bg-white p-5 shadow-sm transition-all duration-300 hover:border-orange-100 hover:shadow-card"
+              >
+                <span className="flex h-10 w-10 flex-none items-center justify-center rounded-xl bg-gradient-to-br from-orange-50 to-emerald-50 text-orange-500 ring-1 ring-orange-100 transition-all group-hover:shadow-glow-orange">
+                  <Icon aria-hidden="true" size={18} />
+                </span>
+                <span className="mt-1.5 text-sm font-medium leading-snug text-slate-700">{area.label}</span>
+              </motion.li>
+            )
+          })}
+        </motion.ul>
       </div>
     </section>
   )
 }
-
-export default AboutSection

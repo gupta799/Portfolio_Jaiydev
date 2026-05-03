@@ -41,20 +41,15 @@ export default function HeroAnimationCarousel(): JSX.Element {
   const startTimeRef = useRef<number>(Date.now())
   const rafRef = useRef<number>(0)
 
-  // Animate the progress bar via rAF
   useEffect(() => {
     startTimeRef.current = Date.now()
     setProgress(0)
 
     const tick = () => {
       const elapsed = Date.now() - startTimeRef.current
-      const pct = Math.min(elapsed / AUTO_ROTATE_MS, 1)
-      setProgress(pct)
-      if (pct < 1) {
-        rafRef.current = requestAnimationFrame(tick)
-      }
+      setProgress(Math.min(elapsed / AUTO_ROTATE_MS, 1))
+      if (elapsed < AUTO_ROTATE_MS) rafRef.current = requestAnimationFrame(tick)
     }
-
     rafRef.current = requestAnimationFrame(tick)
 
     const timer = window.setInterval(() => {
@@ -69,79 +64,82 @@ export default function HeroAnimationCarousel(): JSX.Element {
     }
   }, [activeIndex, panels.length])
 
-  const handleTabClick = (index: number) => {
+  const handleTab = (index: number) => {
     setActiveIndex(index)
     startTimeRef.current = Date.now()
     setProgress(0)
   }
 
-  const activePanel = panels[activeIndex]
+  const active = panels[activeIndex]
 
   return (
-    <div className="flex h-full flex-col gap-5">
-      {/* Gliding tab selector */}
-      <div className="relative flex items-center rounded-full bg-white/6 p-1" role="tablist">
-        {/* Sliding active background */}
-        <motion.div
-          className="absolute inset-y-1 rounded-full bg-white/12 border border-white/10"
-          layoutId="carousel-tab-bg"
-          transition={{ type: 'spring', stiffness: 400, damping: 35 }}
-          style={{
-            left: `calc(${(activeIndex / panels.length) * 100}% + 4px)`,
-            width: `calc(${100 / panels.length}% - 8px)`,
-          }}
-        />
-        {panels.map((panel, index) => (
-          <button
-            key={panel.id}
-            role="tab"
-            aria-selected={index === activeIndex}
-            className={`relative z-10 flex-1 rounded-full py-2 text-xs font-semibold transition-colors duration-200 ${
-              index === activeIndex ? 'text-white' : 'text-white/40 hover:text-white/70'
-            }`}
-            onClick={() => handleTabClick(index)}
-            type="button"
-          >
-            {panel.label}
-          </button>
-        ))}
-      </div>
+    <div className="glass-dark-strong overflow-hidden rounded-3xl">
+      {/* Tab bar */}
+      <div className="flex items-center justify-between border-b border-white/8 px-6 py-4">
+        <div className="flex items-center gap-1">
+          {panels.map((panel, i) => {
+            const isActive = i === activeIndex
+            return (
+              <button
+                key={panel.id}
+                onClick={() => handleTab(i)}
+                type="button"
+                className={`relative rounded-full px-5 py-2 text-xs font-semibold transition-colors duration-200 ${
+                  isActive ? 'text-white' : 'text-white/35 hover:text-white/65'
+                }`}
+              >
+                {panel.label}
+                {/* Gradient underline on active */}
+                {isActive && (
+                  <motion.span
+                    layoutId="tab-indicator"
+                    className="absolute -bottom-[1px] left-4 right-4 h-px rounded-full bg-gradient-to-r from-orange-400 to-emerald-400"
+                    transition={{ type: 'spring', stiffness: 400, damping: 35 }}
+                  />
+                )}
+              </button>
+            )
+          })}
+        </div>
 
-      {/* Progress strip under active tab */}
-      <div className="h-px w-full overflow-hidden rounded-full bg-white/8">
-        <motion.div
-          className="h-full rounded-full bg-gradient-to-r from-orange-400 to-emerald-400"
-          style={{ width: `${progress * 100}%` }}
-          transition={{ duration: 0 }}
-        />
+        {/* Progress strip */}
+        <div className="h-px w-24 overflow-hidden rounded-full bg-white/10">
+          <motion.div
+            className="h-full origin-left rounded-full bg-gradient-to-r from-orange-400 to-emerald-400"
+            style={{ scaleX: progress }}
+            transition={{ duration: 0 }}
+          />
+        </div>
       </div>
 
       {/* Description */}
-      <AnimatePresence mode="wait">
-        <motion.p
-          key={`desc-${activePanel.id}`}
-          className="text-sm leading-relaxed text-white/55"
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -8 }}
-          transition={{ duration: 0.3, ease: 'easeOut' }}
-        >
-          {activePanel.description}
-        </motion.p>
-      </AnimatePresence>
+      <div className="px-6 pt-4 pb-2 min-h-[48px]">
+        <AnimatePresence mode="wait">
+          <motion.p
+            key={`desc-${active.id}`}
+            className="text-sm text-white/50"
+            initial={{ opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -6 }}
+            transition={{ duration: 0.25 }}
+          >
+            {active.description}
+          </motion.p>
+        </AnimatePresence>
+      </div>
 
-      {/* Panel content with spatial Apple transition */}
-      <div className="relative flex-1 overflow-hidden rounded-2xl">
+      {/* Panel */}
+      <div className="relative h-[500px] md:h-[540px]">
         <AnimatePresence mode="wait" initial={false}>
           <motion.div
-            key={activePanel.id}
-            className="absolute inset-0"
-            initial={{ opacity: 0, x: 28, filter: 'blur(6px)' }}
+            key={active.id}
+            className="absolute inset-0 p-4"
+            initial={{ opacity: 0, x: 32, filter: 'blur(8px)' }}
             animate={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
-            exit={{ opacity: 0, x: -28, filter: 'blur(6px)' }}
-            transition={{ duration: 0.38, ease: [0.16, 1, 0.3, 1] }}
+            exit={{ opacity: 0, x: -32, filter: 'blur(8px)' }}
+            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
           >
-            {activePanel.element}
+            {active.element}
           </motion.div>
         </AnimatePresence>
       </div>
