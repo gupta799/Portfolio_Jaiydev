@@ -1,5 +1,6 @@
 import type {
   Article,
+  ContactMethod,
   ExperienceItem,
   Project,
   ProjectChart,
@@ -187,5 +188,30 @@ export const articles: Article[] = [
       'How we built infrastructure that enabled 20+ teams to fine-tune models on GPU clusters without ML expertise.',
     link: 'https://linkedin.com/in/jaiydev-gupta-408269160/',
     year: '2024',
+  },
+]
+
+export const contactMethods: ContactMethod[] = [
+  {
+    label: 'Email',
+    href: 'mailto:jaiydev799@hotmail.com',
+    description: 'jaiydev799@hotmail.com',
+  },
+  {
+    label: 'LinkedIn',
+    href: 'https://linkedin.com/in/jaiydev-gupta-408269160/',
+    description: 'Connect for AI strategy, platform, and collaboration roles.',
+    external: true,
+  },
+  {
+    label: 'GitHub',
+    href: 'https://github.com/gupta799',
+    description: 'Browse code, experiments, and infrastructure prototypes.',
+    external: true,
+  },
+  {
+    label: 'Resume',
+    href: '/resume.pdf',
+    description: 'Download the latest resume in PDF format.',
   },
 ]

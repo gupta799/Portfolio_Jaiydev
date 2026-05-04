@@ -81,3 +81,10 @@ export type Article = {
   link: string
   year: string
 }
+
+export type ContactMethod = {
+  label: string
+  href: string
+  description: string
+  external?: boolean
+}
