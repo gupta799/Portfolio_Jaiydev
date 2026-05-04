@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import ForceMultiplierAnimation from './ForceMultiplierAnimation'
+import ImpactPanel from './ImpactPanel'
 import ClaudeDiffAnimation from './ClaudeDiffAnimation'
 import FineTuneCliAnimation from './FineTuneCliAnimation'
 
@@ -13,10 +13,10 @@ type Panel = {
 
 const PANELS: Panel[] = [
   {
-    id: 'force-multiplier',
+    id: 'impact',
     label: 'Impact',
-    description: '1 engineer → 4,000-person org capacity. Building leverage, not just tools.',
-    element: <ForceMultiplierAnimation />,
+    description: '4,000 engineers with AI access. Built from scratch by one team.',
+    element: <ImpactPanel />,
   },
   {
     id: 'claude-diff',
